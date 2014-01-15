@@ -13,7 +13,7 @@
 
 Route::get('/', array( 'as' => 'index', 'uses' => 'HomeController@showHome' ) );
 
-Route::post('/registrar', array('before' => 'validarInforRegistro', 'uses' => 'HomeController@registrarUsuario') );
+Route::post('/registrar', array('before' => 'validarInforRegistro', 'uses' => 'RegistroController@registrarUsuario') );
 
 /* 
  * Se cambio para usar layouts y controlladores
@@ -28,7 +28,7 @@ Route::get('/home', function()
 	return View::make('home');
 });
 
-Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@registro') );
+Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@formulario') );
 
 Route::get('/login', function()
 {

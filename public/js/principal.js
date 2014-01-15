@@ -46,8 +46,11 @@ var loadLoginJS = function() {
 };
 
 var loadRegistroJS = function() {
+	
 	$('#aceptarRegistro').unbind();
-	$('#aceptarRegistro').click(function(e) {
+	$('#aceptarRegistro').click( function(e) {
+		e.preventDefault();
+		console.log('se presiono boton aceptar');
 		var hayErrores = false;
 		// Validacion para campos vacios en todos los inputs, si quieres un input opcional solo agregale la clase canBN y se lo saltara
 		$('input').each(function() {

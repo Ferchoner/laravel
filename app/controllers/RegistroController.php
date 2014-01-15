@@ -2,7 +2,7 @@
 
 class RegistroController extends BaseController {
 
-    public function registro()
+    public function formulario()
     {
     	$arrayDays['dia'] = 'Dia';
 		$arrayMonths['mes'] = 'Mes';
@@ -15,6 +15,10 @@ class RegistroController extends BaseController {
 			$arrayYears[$i] = $i;
 		return View::make('registro', array('arrayDays' => $arrayDays, 'arrayMonths' => $arrayMonths, 'arrayYears' => $arrayYears));
     }
+	
+	public function registrarUsuario(){
+		return json_encode( array( 'error' => TRUE ) );
+	}
 }
 
 

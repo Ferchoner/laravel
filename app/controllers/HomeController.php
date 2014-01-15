@@ -26,9 +26,4 @@ class HomeController extends BaseController {
     {
        $this->layout->content = View::make('home');
     }
-
-    public function registrarUsuario()
-    {
-        return '{ "error" : "false" }';
-    }
 }
