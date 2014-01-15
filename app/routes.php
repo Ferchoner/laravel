@@ -28,16 +28,9 @@ Route::get('/home', function()
 	return View::make('home');
 });
 
-Route::get('/registro', function()
-{
-	return View::make('registro');
-});
+Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@registro') );
 
 Route::get('/login', function()
 {
 	return View::make('login');
-});
-
-Route::get('/prueba-form', function(){
-	return View::make('forma');
 });
