@@ -48,7 +48,7 @@ var loadLoginJS = function() {
 var loadRegistroJS = function() {
 	
 	$('#aceptarRegistro').unbind();
-	$('#aceptarRegistro').( function(e) {
+	$('#aceptarRegistro').click( function(e) {
 		e.preventDefault();
 		console.log('se presiono boton aceptar');
 		var hayErrores = false;
