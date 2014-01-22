@@ -84,9 +84,9 @@
 					<div class="small-5 column left">
 						<select id="customDropdown" name="estado">
 							<option>Estado</option>
-							{{-- @foreach ($estados as $id_estado => $estado)
-							<option value="{{$id_estado}}">{{$estado}}</option>
-							@endforeach --}}
+							@foreach ($estados as $id_estado => $estado)
+								<option value="{{$estado['id']}}">{{$estado['nombre']}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>
@@ -98,6 +98,7 @@
 					<div class="small-5 column left">
 						<select id="customDropdown" name="ciudad">
 							<option>Ciudad</option>
+							<option value="1">Morelia</option>
 						</select>
 					</div>
 				</div>
@@ -107,7 +108,7 @@
 					</div>
 					<div class="small-2 column">
 						{{ Form::submit('Aceptar', array('class'=>'small button right', 'id'=>'aceptarRegistro')) }}
-					</div>
+					</div>					
 				</div>
 			</div>
 		</div>

@@ -13,11 +13,19 @@ class RegistroController extends BaseController {
 			$arrayMonths[($i < 10 ? '0' . $i : $i)] = $i;
 		for ($i=2013; $i > 1910; $i--) 
 			$arrayYears[$i] = $i;
-		return View::make('registro', array('arrayDays' => $arrayDays, 'arrayMonths' => $arrayMonths, 'arrayYears' => $arrayYears));
+		$estados = Estado::all();
+		return View::make('registro', array('arrayDays' => $arrayDays, 'arrayMonths' => $arrayMonths, 'arrayYears' => $arrayYears, 'estados' => $estados));
     }
 	
+	public function getCities(){
+		if ( Input::has('id') ) {
+			return Response::json( Ciudad::where( 'id_estado', '=', Input::get('id') )->get() );
+		}
+		return Response::json( array('error' => 'true', 'errorMessage'=>'No hay identificador') );
+	}
+	
 	public function registrarUsuario(){
-		return json_encode( array( 'error' => TRUE ) );
+		return Response::json( array( 'error' => TRUE ) );
 	}
 }
 

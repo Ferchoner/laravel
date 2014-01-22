@@ -15,22 +15,17 @@ Route::get('/', array( 'as' => 'index', 'uses' => 'HomeController@showHome' ) );
 
 Route::post('/registrar', array('before' => 'validarInforRegistro', 'uses' => 'RegistroController@registrarUsuario') );
 
-/* 
- * Se cambio para usar layouts y controlladores
- * a HomeController
-Route::get('/home', function()
-{
-	return View::make('principal');
-});
-*/
-Route::get('/home', function()
-{
-	return View::make('home');
-});
 
 Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@formulario') );
+
+Route::post('/get-cities', array( 'as' => 'ciudades', 'uses' => 'RegistroController@getCities') );
 
 Route::get('/login', function()
 {
 	return View::make('login');
+});
+
+Route::get('/home', function()
+{
+	return View::make('home');
 });

@@ -52,8 +52,7 @@ var loadRegistroJS = function() {
 	
 	$('#registro-form').unbind();
 	$('#registro-form').on('submit', function( event ){
-		event.preventDefault();
-		console.log('se presiono boton aceptar');
+		event.preventDefault();		
 		var hayErrores = false;
 		// Validacion para campos vacios en todos los inputs, si quieres un input opcional solo agregale la clase canBN y se lo saltara
 		$('input').each(function() {
@@ -93,6 +92,20 @@ var loadRegistroJS = function() {
 		$('#temp').load('/home #content', function() {
 			contenido = $('#temp #content').children();
 			$('#content').html(contenido);
+		});
+	});
+	
+	$('select[name=estado]').change( function( e ){		
+		$.post('/get-cities', {'id': $('select[name=estado]').val()}, function( data ){
+			options = '<option>Ciudad</option>';
+			luOptions = '<li class="selected">Ciudad</li>';
+			$.each( data, function( index, value){
+				options += '<option value="'+value.id+'">'+value.nombre+'</option>';
+				luOptions += '<li>'+value.nombre+'</li>';
+			});
+			$('select[name=ciudad]').html(options);
+			$('select[name=ciudad]').siblings().children('a.current').html('Ciudad');
+			$('select[name=ciudad]').siblings().children('ul').html(luOptions);
 		});
 	});
 };
