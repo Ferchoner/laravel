@@ -1310,7 +1310,7 @@ button, .button {
   cursor: pointer;
   font-family: inherit;
   font-weight: bold;
-  line-height: 1;
+  line-height: 1.25;
   margin: 0 0 1.25em;
   position: relative;
   text-decoration: none;

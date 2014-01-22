@@ -1,5 +1,5 @@
 <div class="large-12 column">
-	{{ Form::open(array('method' => 'post', 'files' => true, 'class' => 'custom')) }}
+	{{ Form::open(array('method' => 'post', 'files' => true, 'id'=>'registro-form', 'class' => 'custom')) }}
 	<fieldset>
 		<legend>
 			Pagina de Registro
@@ -103,7 +103,7 @@
 				</div>
 				<div class="row collapse">
 					<div class="small-2 column">
-						{{ Form::submit('Atras', array('class'=>'small button', 'id'=>'aHome')) }}
+						{{ Form::label(null, 'Atras', array('class'=>'small button', 'id'=>'aHome')) }}
 					</div>
 					<div class="small-2 column">
 						{{ Form::submit('Aceptar', array('class'=>'small button right', 'id'=>'aceptarRegistro')) }}
