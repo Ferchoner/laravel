@@ -11,7 +11,7 @@ class RegistroController extends BaseController {
 			$arrayDays[($i < 10 ? '0' . $i : $i)] = $i;
 		for ($i=1; $i < 13; $i++) 
 			$arrayMonths[($i < 10 ? '0' . $i : $i)] = $i;
-		for ($i=2013; $i > 1910; $i--) 
+		for ($i=date('Y')-18; $i > 1910; $i--) 
 			$arrayYears[$i] = $i;
 		$estados = Estado::all();
 		return View::make('registro', array('arrayDays' => $arrayDays, 'arrayMonths' => $arrayMonths, 'arrayYears' => $arrayYears, 'estados' => $estados));

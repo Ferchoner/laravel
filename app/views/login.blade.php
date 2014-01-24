@@ -26,7 +26,7 @@
 
 					<div class="row">
 						<div class="push-2 column">
-							{{ Form::label(null, 'Atras', array('class'=>'small button', 'id'=>'aHome')) }}
+							{{ Form::label(null, 'Cancelar', array('class'=>'small button', 'id'=>'aHome')) }}
 							{{ Form::submit('Aceptar', array('class'=>'small button', 'id'=>'aceptarLogin')) }}
 						</div>
 					</div>

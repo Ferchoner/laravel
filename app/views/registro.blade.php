@@ -33,7 +33,7 @@
 				</div>
 				<div class="row collapse">
 					<div class="small-3 column">
-						{{ Form::label(null,'Fecha de Nacimiento', array('class' => 'prefix')) }}
+						{{ Form::label('FechaNac','Fecha de Nacimiento', array('class' => 'prefix')) }}
 					</div>
 					<div class="small-2 column">						
 						{{ Form::select('dia', $arrayDays, array('id' => 'customDropdown') ) }}
@@ -104,7 +104,7 @@
 				</div>
 				<div class="row collapse">
 					<div class="small-2 column">
-						{{ Form::label(null, 'Atras', array('class'=>'small button', 'id'=>'aHome')) }}
+						{{ Form::label(null, 'Cancelar', array('class'=>'small button', 'id'=>'aHome')) }}
 					</div>
 					<div class="small-2 column">
 						{{ Form::submit('Aceptar', array('class'=>'small button right', 'id'=>'aceptarRegistro')) }}

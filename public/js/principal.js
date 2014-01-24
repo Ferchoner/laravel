@@ -19,16 +19,22 @@ var loadLoginJS = function() {
 	
 	$('#login-form').unbind();
 	$('#login-form').on('submit', function(e) {
-		e.preventDefault();
+		e.preventDefaul();
+					
+		hayErrores = false;
 		$('input').each(function() {
 			// Validacion para inputs vacios, si quieres un input opcional solo agregale la clase canBN y se lo saltara
 			if ($(this).val() == '' && !$(this).hasClass('canBN')) {
 				showError($(this).attr('id'), 'Este campo es obligatorio');
+				hayErrores = true;
 			};
-		});
-	
+		});		
 		// Validaciones hechas, falta codigo para hacer la llamada AJAX al controlador de login
-		return false;
+		if(!hayErrores){
+			
+		}
+		
+		return false;		
 	});
 
 	$('input').unbind();
@@ -52,7 +58,8 @@ var loadRegistroJS = function() {
 	
 	$('#registro-form').unbind();
 	$('#registro-form').on('submit', function( event ){
-		event.preventDefault();		
+		event.preventDefault();
+				
 		var hayErrores = false;
 		// Validacion para campos vacios en todos los inputs, si quieres un input opcional solo agregale la clase canBN y se lo saltara
 		$('input').each(function() {
@@ -66,10 +73,25 @@ var loadRegistroJS = function() {
 			showErrorName('input', 'sexo');
 			hayErrores = true;
 		};
-		if (hayErrores) {
-			e.preventDefault();
-			return false;
+		if( $('select[name="ciudad"]').val() != 'Ciudad' || $('select[name="ciudad"]').val() != '' || $('select[name="ciudad"]').val() == undefined ) {
+			showErrorInput('ciudad', 'Este campo es obligatorio');
+			hayErrores = true;
 		}
+		if( $('select[name="estado"]').val() != 'Estado' || $('select[name="estado"]').val() != '' || $('select[name="estado"]').val() == undefined ) {
+			showErrorInput('estado', 'Este campo es obligatorio');
+			hayErrores = true;
+		}
+		if( $('select[name="dia"]').val() != 'Dia' || $('select[name="dia"]').val() != '' || $('select[name="dia"]').val() == undefined ||
+			$('select[name="mes"]').val() != 'Mes' || $('select[name="mes"]').val() != '' || $('select[name="mes"]').val() == undefined ||
+			$('select[name="anio"]').val() != 'Año' || $('select[name="anio"]').val() != '' || $('select[name="anio"]').val() == undefined ) {
+				showErrorLabel('FechaNac', 'La fecha es obligatoria');
+				hayErrores = true;
+		}
+		if(!hayErrores){
+			
+		}
+		
+		return false;		
 	});
 
 	$('input').unbind();
@@ -93,6 +115,11 @@ var loadRegistroJS = function() {
 			contenido = $('#temp #content').children();
 			$('#content').html(contenido);
 		});
+	});
+	
+	$('select[name=anio], select[name=mes], select[name=dia]').unbind();
+	$('select[name=anio], select[name=mes], select[name=dia]').change( function(){
+		hideErrorFor('label', 'FechaNac');
 	});
 	
 	$('select[name=estado]').change( function( e ){		

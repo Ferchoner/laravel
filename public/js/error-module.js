@@ -21,12 +21,17 @@ var showErrorInput = function(nameElement, errorMessage) {
 };
 
 var showErrorName = function(selector, nameElement) {
-	if (!$(selector + '[name=' + nameElement + ']').parent().hasClass('error')) {
-		$(selector + '[name=' + nameElement + ']').parent().addClass('error').append('<small class="error" style="margin-top: 0px; display:none">Selecciona una opcion por favor</small>');
-		$('select[name=' + nameElement + ']').siblings().last().slideDown('1000');
+	if (!$(selector + '[name=' + nameElement + ']').parent().hasClass('error'))
+		$(selector + '[name=' + nameElement + ']').parent().addClass('error');
+};
+
+var showErrorLabel = function(nameElement, errorMessage) {
+	if (!$('label[for=' + nameElement + ']').parent().hasClass('error')) {
+		$('label[for=' + nameElement + ']').parent().addClass('error').append('<small class="error" style="margin-top: -2px; display:none">' + errorMessage + '</small>');
+		$('label[for=' + nameElement + ']').siblings().last().slideDown('1000');
 	} else {
-		$('select[name=' + nameElement + ']').siblings().last().slideUp('400', function(){
-			$(this).html('Selecciona una opcion por favor').slideDown('400');
+		$('label[for=' + nameElement + ']').siblings().last().slideUp('400', function(){
+			$(this).html(errorMessage).slideDown('400');
 		});
 	}
 };
@@ -43,6 +48,14 @@ var hideErrorInput = function(selector, nameElement) {
 	if ($(selector + '[name=' + nameElement + ']').parent().hasClass('error')) {
 		$(selector + '[name=' + nameElement + ']').siblings().last().slideUp('1000', function() {
 			$(selector + '[name=' + nameElement + ']').parent().removeClass('error').children().last().remove();
+		});
+	}
+};
+
+var hideErrorFor = function(selector, nameElement) {
+	if ($(selector + '[for=' + nameElement + ']').parent().hasClass('error')) {
+		$(selector + '[for=' + nameElement + ']').siblings().last().slideUp('1000', function() {
+			$(selector + '[for=' + nameElement + ']').parent().removeClass('error').children().last().remove();
 		});
 	}
 };
