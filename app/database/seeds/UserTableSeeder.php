@@ -11,6 +11,7 @@ class UserTableSeeder extends Seeder {
 		);
 		 
         DB::table('users')->insert($users);
+        // Prueba de PHPStorm :D
     }
  
 }
