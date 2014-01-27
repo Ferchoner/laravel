@@ -46,9 +46,14 @@ var hideError = function(idElement) {
 
 var hideErrorInput = function(selector, nameElement) {
 	if ($(selector + '[name=' + nameElement + ']').parent().hasClass('error')) {
-		$(selector + '[name=' + nameElement + ']').siblings().last().slideUp('1000', function() {
-			$(selector + '[name=' + nameElement + ']').parent().removeClass('error').children().last().remove();
-		});
+		if( siExiste( $(selector + '[name=' + nameElement + ']').siblings('small') ) ) {
+			$(selector + '[name=' + nameElement + ']').siblings('small').slideUp('1000', function() {
+				$(selector + '[name=' + nameElement + ']').parent().removeClass('error').children('small').remove();
+			});
+		}
+		else{
+			$(selector + '[name=' + nameElement + ']').parent().removeClass('error').children('small').remove();
+		}
 	}
 };
 
@@ -61,7 +66,7 @@ var hideErrorFor = function(selector, nameElement) {
 };
 
 var siExiste = function(element) {
-	if (element.lenght > 0)
+	if (element.length > 0)
 		return true;
 	return false;
 };

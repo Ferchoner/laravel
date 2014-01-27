@@ -11,13 +11,13 @@
 						{{ Form::label('nombre', 'Nombre', array('class' => 'small prefix')) }}
 					</div>
 					<div class="small-4 column">
-						{{ Form::text('nombre', '', array('id'=>'nombre', 'placeholder'=>'Nombre...')) }}
+						{{ Form::text('nombre', Input::old('nombre'), array('id'=>'nombre', 'placeholder'=>'Nombre...')) }}
 					</div>
 					<div class="small-2 column">
 						{{ Form::label('apellidos', 'Apellidos', array('class' => 'prefix')) }}
 					</div>
 					<div class="small-4 column">
-						{{ Form::text('apellido', '', array('id'=>'apellido', 'placeholder'=>'Apellidos...')) }}
+						{{ Form::text('apellido', Input::old('apellido'), array('id'=>'apellido', 'placeholder'=>'Apellidos...')) }}
 					</div>
 				</div>
 				<div class="row">
@@ -50,7 +50,7 @@
 						{{ Form::label(null, 'Correo Electr&oacute;nico', array('class' => 'prefix')) }}
 					</div>
 					<div class="small-4 column left">
-						{{ Form::email('email', '', array('id'=>'email', 'placeholder'=>'example@gmail.com')) }}
+						{{ Form::email('email', Input::old('email'), array('id'=>'email', 'placeholder'=>'example@gmail.com')) }}
 					</div>
 				</div>
 				<div class="row collapse">
@@ -66,9 +66,10 @@
 						{{ Form::label(null, 'Direcci&oacute;n', array('class' => 'prefix')) }}
 					</div>
 					<div class="small-5 column left">
-						{{ Form::text('physical_address', '', array('id'=>'physical_address', 'placeholder'=>'Dirección...')) }}
+						{{ Form::text('physical_address', Input::old('physical_address'), array('id'=>'physical_address', 'placeholder'=>'Dirección...')) }}
 					</div>
 				</div>
+				{{-- Comentamos hasta tener una solucion para poder subir archivos a traves de AJAX
 				<div class="row collapse">
 					<div class="small-2 column">
 						{{ Form::label(null, 'Fotografia', array('class' => 'prefix')) }}
@@ -76,7 +77,8 @@
 					<div class="small-5 column left">
 						{{ Form::file('file', array('id'=>'foto', 'class' => 'tiny button secondary canBN', )) }}
 					</div>
-				</div>
+				</div> 
+				--}}
 				<div class="row collapse">
 					<div class="small-2 column">
 						{{ Form::label(null, 'Estado', array('class' => 'prefix')) }}
@@ -98,7 +100,6 @@
 					<div class="small-5 column left">
 						<select id="customDropdown" name="ciudad">
 							<option>Ciudad</option>
-							<option value="1">Morelia</option>
 						</select>
 					</div>
 				</div>

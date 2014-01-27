@@ -25,6 +25,7 @@ class RegistroController extends BaseController {
 	}
 	
 	public function registrarUsuario(){
+		print_r(Input::all()); 
 		return Response::json( array( 'error' => TRUE ) );
 	}
 }

@@ -38,7 +38,7 @@ var loadLoginJS = function() {
 	});
 
 	$('input').unbind();
-	$('input').change(function(e) {
+	$('input').change(function(e) {		
 		if ($(this).attr('id'))
 			hideError($(this).attr('id'));
 	});
@@ -73,37 +73,38 @@ var loadRegistroJS = function() {
 			showErrorName('input', 'sexo');
 			hayErrores = true;
 		};
-		if( $('select[name="ciudad"]').val() != 'Ciudad' || $('select[name="ciudad"]').val() != '' || $('select[name="ciudad"]').val() == undefined ) {
+		if( $('select[name="ciudad"]').val() == 'Ciudad' || $('select[name="ciudad"]').val() == '' || $('select[name="ciudad"]').val() == undefined ) {
 			showErrorInput('ciudad', 'Este campo es obligatorio');
 			hayErrores = true;
 		}
-		if( $('select[name="estado"]').val() != 'Estado' || $('select[name="estado"]').val() != '' || $('select[name="estado"]').val() == undefined ) {
+		if( $('select[name="estado"]').val() == 'Estado' || $('select[name="estado"]').val() == '' || $('select[name="estado"]').val() == undefined ) {
 			showErrorInput('estado', 'Este campo es obligatorio');
 			hayErrores = true;
 		}
-		if( $('select[name="dia"]').val() != 'Dia' || $('select[name="dia"]').val() != '' || $('select[name="dia"]').val() == undefined ||
-			$('select[name="mes"]').val() != 'Mes' || $('select[name="mes"]').val() != '' || $('select[name="mes"]').val() == undefined ||
-			$('select[name="anio"]').val() != 'Año' || $('select[name="anio"]').val() != '' || $('select[name="anio"]').val() == undefined ) {
+		if( $('select[name="dia"]').val() == 'dia' || $('select[name="dia"]').val() == '' || $('select[name="dia"]').val() == undefined ||
+			$('select[name="mes"]').val() == 'mes' || $('select[name="mes"]').val() == '' || $('select[name="mes"]').val() == undefined ||
+			$('select[name="anio"]').val() == 'anio' || $('select[name="anio"]').val() == '' || $('select[name="anio"]').val() == undefined ) {
 				showErrorLabel('FechaNac', 'La fecha es obligatoria');
 				hayErrores = true;
 		}
-		if(!hayErrores){
-			
-		}
-		
+		if(!hayErrores){			
+			$.post('/registrar', $('#registro-form').serialize(), function( data ){
+				console.log( data );
+			});	
+		}		
 		return false;		
 	});
 
 	$('input').unbind();
-	$('input').change(function(e) {
+	$('input').change(function(e) {		
 		if ($(this).attr('name') == 'sexo')
-			hideErrorInput('input', $(this).attr('name'));
+			hideErrorInput('input', $(this).attr('name'));			
 		else
 			hideError($(this).attr('id'));
 	});
 
 	$('select').unbind();
-	$('select').change(function(e) {
+	$('select').change(function(e) {		
 		hideErrorInput('select', $(this).attr('name'));
 	});
 
@@ -123,7 +124,7 @@ var loadRegistroJS = function() {
 	});
 	
 	$('select[name=estado]').change( function( e ){		
-		$.post('/get-cities', {'id': $('select[name=estado]').val()}, function( data ){
+		$.get('/get-cities', {'id': $('select[name=estado]').val()}, function( data ){
 			options = '<option>Ciudad</option>';
 			luOptions = '<li class="selected">Ciudad</li>';
 			$.each( data, function( index, value){

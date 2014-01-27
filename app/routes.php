@@ -13,12 +13,12 @@
 
 Route::get('/', array( 'as' => 'index', 'uses' => 'HomeController@showHome' ) );
 
-Route::post('/registrar', array('before' => 'validarInforRegistro', 'uses' => 'RegistroController@registrarUsuario') );
+Route::post('/registrar', array('before' => 'csrf|validarInforRegistro', 'uses' => 'RegistroController@registrarUsuario') );
 
 
 Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@formulario') );
 
-Route::post('/get-cities', array( 'as' => 'ciudades', 'uses' => 'RegistroController@getCities') );
+Route::get('/get-cities', array( 'as' => 'ciudades', 'uses' => 'RegistroController@getCities') );
 
 Route::get('/login', function()
 {
