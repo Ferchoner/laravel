@@ -89,7 +89,9 @@ var loadRegistroJS = function() {
 		}
 		if(!hayErrores){			
 			$.post('/registrar', $('#registro-form').serialize(), function( data ){
-				console.log( data );
+				if( data.error ){
+					
+				}
 			});	
 		}		
 		return false;		

@@ -13,7 +13,7 @@
 
 Route::get('/', array( 'as' => 'index', 'uses' => 'HomeController@showHome' ) );
 
-Route::post('/registrar', array('before' => 'csrf|validarInforRegistro', 'uses' => 'RegistroController@registrarUsuario') );
+Route::post('/registrar', array('before' => 'csrf', 'uses' => 'RegistroController@registrarUsuario') );
 
 
 Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@formulario') );

@@ -18,6 +18,8 @@ class Usuario extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('password');
+	
+	 protected $guarded = array('email', 'password');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -38,5 +40,9 @@ class Usuario extends Eloquent {
 	{
 		return $this->password;
 	}
-
+	
+	public function getDates()
+	{
+	    return array();
+	}
 }

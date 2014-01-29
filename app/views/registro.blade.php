@@ -6,6 +6,11 @@
 		</legend>
 		<div class="row">
 			<div class="small-12 column">
+				<div class="row collapse error_container" style="display: none">
+					<div class="small-4 push-4 column">
+						{{ Form::label('', '', array('class' => 'center error')) }}
+					</div>	
+				</div>
 				<div class="row collapse">
 					<div class="small-2 column">
 						{{ Form::label('nombre', 'Nombre', array('class' => 'small prefix')) }}

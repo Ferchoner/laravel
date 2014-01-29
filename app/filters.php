@@ -78,23 +78,3 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
-
-Route::filter('validarInforRegistro', function()
-{
-	$validador = Validator::make(
-					    array( Input::all() ),
-					    array( 
-					    	array('nombre' => 'required|alpha|between:4,30'),
-						    array('apellido' => 'required|alpha|between:4,30'),
-						    array('sexo' => 'required|alpha'),
-						    array('anio' => 'required|digits:4'),
-						    array('email' => 'required|email|unique:usuario|between:6,80'),
-							array('password' => 'required|between:8,16'),
-							array('physical_address' => 'required|between:8,80'),
-							array('estado' => 'required|exist:estado,id'),
-							array('ciudad' => 'required|exist:ciudades,id'),							
-						)
-					);
-						
-	$DOB = Input::get('anio').'-'.Input::get('mes').'-'.Input::get('dia');
-});
