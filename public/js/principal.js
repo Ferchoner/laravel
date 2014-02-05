@@ -18,9 +18,8 @@ $(document).ready(function() {
 var loadLoginJS = function() {
 	
 	$('#login-form').unbind();
-	$('#login-form').on('submit', function(e) {
-		e.preventDefaul();
-					
+	$('#login-form').on('submit', function( e ) {
+		e.preventDefault();					
 		hayErrores = false;
 		$('input').each(function() {
 			// Validacion para inputs vacios, si quieres un input opcional solo agregale la clase canBN y se lo saltara
@@ -31,7 +30,10 @@ var loadLoginJS = function() {
 		});		
 		// Validaciones hechas, falta codigo para hacer la llamada AJAX al controlador de login
 		if(!hayErrores){
-			
+			$.post('/authentication', $('#login-form').serialize(), function( data ){
+				console.log(data);
+				//if()
+			});
 		}
 		
 		return false;		
@@ -59,7 +61,7 @@ var loadRegistroJS = function() {
 	$('#registro-form').unbind();
 	$('#registro-form').on('submit', function( event ){
 		event.preventDefault();
-				
+		$('div.error_container').slideUp(400);
 		var hayErrores = false;
 		// Validacion para campos vacios en todos los inputs, si quieres un input opcional solo agregale la clase canBN y se lo saltara
 		$('input').each(function() {
@@ -90,7 +92,17 @@ var loadRegistroJS = function() {
 		if(!hayErrores){			
 			$.post('/registrar', $('#registro-form').serialize(), function( data ){
 				if( data.error ){
-					
+					$('div.error_container').children().children().html(message);
+					$('div.error_container').slideDown(400);
+				}
+				else {
+					$('#content').append('<div id="temp" style="visible:hidden"></div>');
+					$('#temp').load('/home #content', function() {
+						contenido = $('#temp #content').children();
+						$('#content').html(contenido);
+						$('div.error_container').children().children().html('Usuario creado con éxito!! :D');
+						$('div.error_container').slideDown(400);
+					});
 				}
 			});	
 		}		
@@ -98,7 +110,8 @@ var loadRegistroJS = function() {
 	});
 
 	$('input').unbind();
-	$('input').change(function(e) {		
+	$('input').change(function(e) {
+		$('div.error_container').slideUp(400);	
 		if ($(this).attr('name') == 'sexo')
 			hideErrorInput('input', $(this).attr('name'));			
 		else
@@ -106,13 +119,15 @@ var loadRegistroJS = function() {
 	});
 
 	$('select').unbind();
-	$('select').change(function(e) {		
+	$('select').change(function(e) {
+		$('div.error_container').slideUp(400);
 		hideErrorInput('select', $(this).attr('name'));
 	});
 
 	$('#aHome').unbind();
 	$('#aHome').click(function(e) {
 		e.preventDefault();
+		$('div.error_container').slideUp(400);
 		$('#content').append('<div id="temp" style="visible:hidden"></div>');
 		$('#temp').load('/home #content', function() {
 			contenido = $('#temp #content').children();
@@ -122,10 +137,12 @@ var loadRegistroJS = function() {
 	
 	$('select[name=anio], select[name=mes], select[name=dia]').unbind();
 	$('select[name=anio], select[name=mes], select[name=dia]').change( function(){
+		$('div.error_container').slideUp(400);
 		hideErrorFor('label', 'FechaNac');
 	});
 	
-	$('select[name=estado]').change( function( e ){		
+	$('select[name=estado]').change( function( e ){
+		$('div.error_container').slideUp(400);		
 		$.get('/get-cities', {'id': $('select[name=estado]').val()}, function( data ){
 			options = '<option>Ciudad</option>';
 			luOptions = '<li class="selected">Ciudad</li>';

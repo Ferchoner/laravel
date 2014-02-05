@@ -19,7 +19,7 @@ class Usuario extends Eloquent {
 	 */
 	protected $hidden = array('password');
 	
-	 protected $guarded = array('email', 'password');
+	protected $guarded = array('email', 'password');
 
 	/**
 	 * Get the unique identifier for the user.

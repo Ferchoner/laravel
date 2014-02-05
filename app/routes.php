@@ -15,10 +15,11 @@ Route::get('/', array( 'as' => 'index', 'uses' => 'HomeController@showHome' ) );
 
 Route::post('/registrar', array('before' => 'csrf', 'uses' => 'RegistroController@registrarUsuario') );
 
-
 Route::get('/registro', array( 'as' => 'registro', 'uses' => 'RegistroController@formulario') );
 
 Route::get('/get-cities', array( 'as' => 'ciudades', 'uses' => 'RegistroController@getCities') );
+
+Route::post('/authentication', array( 'as' => 'authUser', 'uses' => 'LoginController@login') );
 
 Route::get('/login', function()
 {
