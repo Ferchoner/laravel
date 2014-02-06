@@ -52,7 +52,7 @@ class RegistroController extends BaseController {
 		$newUser->apellido = Input::get('apellido');
 		$newUser->sexo = Input::get('sexo');
 		$newUser->email = Input::get('email');
-		$newUser->password = Hash::make( Input::get('password') );
+		$newUser->password =  Hash::make( Input::get('password') );
 		$newUser->date_birth = Input::get('anio').'-'.Input::get('mes').'-'.Input::get('dia').' 00:00:00';
 		$newUser->address = Input::get('physical_address');
 		$newUser->estado = Input::get('estado');
