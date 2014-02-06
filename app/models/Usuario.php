@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Usuario extends Eloquent {
+class Usuario extends Eloquent implements UserInterface {
 
 	/**
 	 * The database table used by the model.
@@ -41,8 +40,14 @@ class Usuario extends Eloquent {
 		return $this->password;
 	}
 	
-	public function getDates()
+	/**
+	 * Get the e-mail address where password reminders are sent.
+	 *
+	 * @return string
+	 */
+	public function getReminderEmail()
 	{
-	    return array();
+		return $this->email;
 	}
+	
 }

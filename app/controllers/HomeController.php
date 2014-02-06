@@ -25,5 +25,6 @@ class HomeController extends BaseController {
     public function showHome()
     {
        $this->layout->content = View::make('home');
+	   $this->layout->myAccountHeader = View::make('my-account-profile');
     }
 }

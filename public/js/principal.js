@@ -1,9 +1,28 @@
 $(document).ready(function() {
+	myAccountButtonsActions();
+});
 
+var myAccountButtonsActions = function() {
+	
 	$('#login').click(function(e) {
 		$('#content').load('/login', function() {
 			loadLoginJS();
 		});		
+	});
+	
+	$('#logout').click(function(e) {
+		$.post('/logout', function( data ){
+			if (data.error){
+				alert('Error inesperado: '+error.message);	
+			}
+			else{
+				$('#my_account_buttons').load('/my-account', function(){
+					$('div.error_container').children().children().html(data.message);
+					$('div.error_container').slideDown(400);
+					myAccountButtonsActions();
+				});				
+			}
+		});
 	});
 
 	$('#signup').click(function(e) {
@@ -12,8 +31,7 @@ $(document).ready(function() {
 			loadRegistroJS();
 		});
 	});
-
-});
+};
 
 var loadLoginJS = function() {
 	
@@ -31,8 +49,22 @@ var loadLoginJS = function() {
 		// Validaciones hechas, falta codigo para hacer la llamada AJAX al controlador de login
 		if(!hayErrores){
 			$.post('/authentication', $('#login-form').serialize(), function( data ){
-				console.log(data);
-				//if()
+				if( data.error ){
+					$('div.error_container').children().children().html(data.message);
+					$('div.error_container').slideDown(400);
+				}
+				else{
+					$('#content').append('<div id="temp" style="visible:hidden"></div>');
+					$('#my_account_buttons').load('/my-account', function(){
+						myAccountButtonsActions();
+					});	
+					$('#temp').load('/home #content', function() {
+						contenido = $('#temp #content').children();
+						$('#content').html(contenido);
+						$('div.error_container').children().children().html('Bienvenido!');
+						$('div.error_container').slideDown(400);
+					});					
+				}
 			});
 		}
 		
@@ -92,7 +124,7 @@ var loadRegistroJS = function() {
 		if(!hayErrores){			
 			$.post('/registrar', $('#registro-form').serialize(), function( data ){
 				if( data.error ){
-					$('div.error_container').children().children().html(message);
+					$('div.error_container').children().children().html(data.message);
 					$('div.error_container').slideDown(400);
 				}
 				else {

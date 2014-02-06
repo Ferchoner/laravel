@@ -35,7 +35,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) return Response::json( array( 'error' => TRUE, 'message' => 'Necesitas Logearte primero.' ) );
 });
 
 
@@ -57,7 +57,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::check()) return Response::json( array( 'error' => TRUE, 'message' => 'Ya estas logeado.' ) );
 });
 
 /*
