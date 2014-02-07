@@ -7,6 +7,9 @@
 	</li>
 @else
 	<li>
+		<a id="my-account" class="small button secondary">Mi Cuenta</a>
+	</li>
+	<li>
 		<a id="logout" class="small button secondary">Salir</a>
 	</li>
 @endif

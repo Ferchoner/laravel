@@ -25,10 +25,8 @@ Route::post('/logout', array( 'as' => 'logout', 'uses' => 'LoginController@logou
 
 Route::get('/login', array( 'as' => 'login', 'before'=>'guest', 'uses' => 'LoginController@login') );
 
-Route::get('/home', function(){
-	return View::make('home'); 
-});
+Route::get('/home', function(){ return View::make('home'); });
 
-Route::get('/my-account', function(){
-	return View::make('my-account-profile'); 
-});
+Route::get('/my-account-actions', function(){ return View::make('my-account-buttons'); });
+
+Route::get('/my-account', function(){ return View::make('my-account'); });

@@ -16,7 +16,7 @@ var myAccountButtonsActions = function() {
 				alert('Error inesperado: '+error.message);	
 			}
 			else{
-				$('#my_account_buttons').load('/my-account', function(){
+				$('#my_account_buttons').load('/my-account-actions', function(){
 					$('div.error_container').children().children().html(data.message);
 					$('div.error_container').slideDown(400);
 					myAccountButtonsActions();
@@ -55,7 +55,7 @@ var loadLoginJS = function() {
 				}
 				else{
 					$('#content').append('<div id="temp" style="visible:hidden"></div>');
-					$('#my_account_buttons').load('/my-account', function(){
+					$('#my_account_buttons').load('/my-account-actions', function(){
 						myAccountButtonsActions();
 					});	
 					$('#temp').load('/home #content', function() {

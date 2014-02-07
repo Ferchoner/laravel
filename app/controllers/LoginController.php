@@ -9,6 +9,7 @@ class LoginController extends BaseController {
 		$password = Input::get('pass');
 		
 		$user = Usuario::where('email', 'like', trim(Input::get('usuario')))->first();
+		
 		if ( count($user) <= 0 )
 			return Response::json( array( 'error' => TRUE, 'message' => 'El usuario no existe' ) );
 
