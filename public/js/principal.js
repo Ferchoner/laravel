@@ -25,6 +25,12 @@ var myAccountButtonsActions = function() {
 		});
 	});
 
+	$('#my-account').click(function(e){
+		$('#content').load('/my-account', function() {
+			// Cargar contenidos en la pagina de mi cuenta :D
+		});
+	});
+	
 	$('#signup').click(function(e) {
 		$('#content').load('/registro', function() {
 			$(document).foundation();

@@ -4,6 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*"
+		"zurb/foundation": "*"
 	},
 	"autoload": {
 		"classmap": [
