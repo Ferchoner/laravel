@@ -16,13 +16,13 @@
 						{{ Form::label('nombre', 'Nombre', array('class' => 'small prefix')) }}
 					</div>
 					<div class="small-4 column">
-						{{ Form::text('nombre', Input::old('nombre'), array('id'=>'nombre', 'placeholder'=>'Nombre...')) }}
+						{{ Form::text('nombre', ( Auth::check() ? Auth::user()->nombre : Input::old('nombre') ), array('id'=>'nombre', 'placeholder'=>'Nombre...')) }}
 					</div>
 					<div class="small-2 column">
 						{{ Form::label('apellidos', 'Apellidos', array('class' => 'prefix')) }}
 					</div>
 					<div class="small-4 column">
-						{{ Form::text('apellido', Input::old('apellido'), array('id'=>'apellido', 'placeholder'=>'Apellidos...')) }}
+						{{ Form::text('apellido', ( Auth::check() ? Auth::user()->apellido : Input::old('apellido') ), array('id'=>'apellido', 'placeholder'=>'Apellidos...')) }}
 					</div>
 				</div>
 				<div class="row">
@@ -31,8 +31,8 @@
 							{{ Form::label('sexo', 'Sexo', array('class' => 'right inline')) }}
 						</div>
 						<div class="small-11 column">
-							<label for="radio">{{ Form::radio('sexo', 'M', FALSE, array( 'style'=>'visibility: hidden;' ) ) }}<span class="custom radio"></span>&#32;Masculino</label>
-							<label for="radio">{{ Form::radio('sexo', 'F', FALSE, array( 'style'=>'visibility: hidden;' ) ) }}<span class="custom radio"></span>&#32;Femenino</label>
+							<label for="radio">{{ Form::radio('sexo', 'M', ( Auth::check() ? Auth::user()->sexo == 'M' : Input::old('sexo') == 'M' ), array( 'style'=>'visibility: hidden;' ) ) }}<span class="custom radio"></span>&#32;Masculino</label>
+							<label for="radio">{{ Form::radio('sexo', 'F', ( Auth::check() ? Auth::user()->sexo == 'F' : Input::old('sexo') == 'F' ), array( 'style'=>'visibility: hidden;' ) ) }}<span class="custom radio"></span>&#32;Femenino</label>
 						</div>
 					</div>
 				</div>
