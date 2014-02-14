@@ -27,10 +27,11 @@ Route::get('/login', array( 'as' => 'login', 'before'=>'guest', 'uses' => 'Login
 
 Route::get('/home', function(){ return View::make('home'); });
 
-Route::get('/my-account-actions', array( 'before' => 'auth', 'uses'=>'MyAccountController@actions'));
+Route::get('/my-account-actions', array( 'uses'=>'MyAccountController@actions'));
 
 Route::get('/my-account', array( 'before' => 'auth', 'uses'=>'MyAccountController@formulario'));
 
+Route::get('/maps', array( 'before' => 'auth', 'uses'=>'MapsController@showMap' ));
 
 /*
 |--------------------------------------------------------------------------
@@ -45,17 +46,23 @@ View::composer('registro', function($view)
 {
 	$arrayDays['dia'] = 'Dia';
 	$arrayMonths['mes'] = 'Mes';
-	$arrayYears['anio'] = 'Año';		
+	$arrayYears['anio'] = 'Año';
+	$estadosCorrecto['ciudad'] = 'Estado';		
 	for( $i=1; $i < 32; $i++)
 		$arrayDays[($i < 10 ? '0' . $i : $i)] = $i;
 	for ($i=1; $i < 13; $i++) 
 		$arrayMonths[($i < 10 ? '0' . $i : $i)] = $i;
 	for ($i=date('Y')-18; $i > 1910; $i--) 
-		$arrayYears[$i] = $i;
-	$estados = Estado::all();
-	
+		$arrayYears[$i] = $i;	
+	$estados = Estado::all();	
+	foreach ($estados as $key => $value) {
+		$estadosCorrecto[$value['id']] = $value['nombre'];
+	}
+	if( Auth::check() ){
+		
+	}
     $view->with('arrayDays', $arrayDays);
 	$view->with('arrayMonths', $arrayMonths);
 	$view->with('arrayYears', $arrayYears);
-	$view->with('estados', $estados);
+	$view->with('estados', $estadosCorrecto);
 });

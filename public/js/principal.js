@@ -2,7 +2,7 @@ $(document).ready(function() {
 	myAccountButtonsActions();
 });
 
-var myAccountButtonsActions = function() {
+function myAccountButtonsActions() {
 	
 	$('#login').click(function(e) {
 		$('#content').load('/login', function() {
@@ -16,11 +16,16 @@ var myAccountButtonsActions = function() {
 				alert('Error inesperado: '+error.message);	
 			}
 			else{
+				$('#content').append('<div id="temp" style="visible:hidden"></div>');
+				$('#temp').load('/home #content', function() {
+					contenido = $('#temp #content').children();
+					$('#content').html(contenido);
+				});
 				$('#my_account_buttons').load('/my-account-actions', function(){
-					$('div.error_container').children().children().html(data.message);
-					$('div.error_container').slideDown(400);
+					$('div.error_container').first().children().children().html(data.message);
+					$('div.error_container').first().slideDown(400);
 					myAccountButtonsActions();
-				});				
+				});							
 			}
 		});
 	});
@@ -33,6 +38,13 @@ var myAccountButtonsActions = function() {
 		});
 	});
 	
+	// $('#showMap').click(function(e){
+		// $('#content').load('/maps', function() {			
+			// loadMaps();
+			// initialize();
+		// });
+	// });
+	
 	$('#signup').click(function(e) {
 		$('#content').load('/registro', function() {
 			$(document).foundation();
@@ -41,7 +53,7 @@ var myAccountButtonsActions = function() {
 	});
 };
 
-var loadLoginJS = function() {
+function loadLoginJS() {
 	
 	$('#login-form').unbind();
 	$('#login-form').on('submit', function( e ) {
@@ -96,7 +108,7 @@ var loadLoginJS = function() {
 	});
 };
 
-var loadRegistroJS = function() {
+function loadRegistroJS() {
 	
 	$('#registro-form').unbind();
 	$('#registro-form').on('submit', function( event ){
@@ -279,4 +291,8 @@ function loadMyAccountJS() {
             $('select[name=ciudad]').html(options).siblings().children('a.current').html('Ciudad').siblings().children('ul').html(luOptions);
         });
     });
+}
+
+function loadMaps(){		
+	
 }
