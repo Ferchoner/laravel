@@ -40,7 +40,7 @@
 				marker.setMap(map);
 				
 				var infowindow = new google.maps.InfoWindow({
-				  		content:'<a id="showMap" onclick="javascript: displayRoute(); void(0);">Mostrar Mapa</a>'
+				  		content:'<a id="showMap" onclick="javascript: displayRoute();">Ruta hasta Chelalá</a>'
 		  		});
 				
 				google.maps.event.addListener(marker,'click',function() {					
@@ -53,8 +53,8 @@
 			
 			function displayRoute() {
 
-			    var start = new google.maps.LatLng(28.694004, 77.110291);
-			    var end = new google.maps.LatLng(28.72082, 77.107241);
+			    var start = new google.maps.LatLng(19.7047528,-101.1648662);
+			    var end = new google.maps.LatLng(19.7069751,-101.1760687);
 			
 			    var directionsDisplay = new google.maps.DirectionsRenderer();
 			    directionsDisplay.setMap(map); // map should be already initialized.
