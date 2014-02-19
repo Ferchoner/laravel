@@ -21,7 +21,8 @@
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBOsVNVZT8bOI-qww5JfGfTUIeAsD-yVOE&sensor=false"></script>
 		<script>
 			var myCenter = new google.maps.LatLng(19.7047528,-101.1648662);
-			
+			var map;
+			var infowindow;
 			function initialize()
 			{
 				var mapProp = {
@@ -30,7 +31,7 @@
 			  		mapTypeId:google.maps.MapTypeId.ROADMAP
 				};
 				
-				var map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
+				map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
 				
 				var marker = new google.maps.Marker({
 			  		position:myCenter,
@@ -39,7 +40,7 @@
 				
 				marker.setMap(map);
 				
-				var infowindow = new google.maps.InfoWindow({
+				infowindow = new google.maps.InfoWindow({
 				  		content:'<a id="showMap" onclick="javascript: displayRoute();">Ruta hasta Chelalá</a>'
 		  		});
 				
@@ -48,16 +49,28 @@
 			  		infowindow.open(map,marker);
 			  	});
 			  	
+				google.maps.event.addListener(map,'click',function( event ) {					
+					console.log(roundMe(event.latLng.d, 6));
+					console.log(roundMe(event.latLng.e, 6));
+			  	});
+			  	
 			  	return false;
 			}
 			
 			function displayRoute() {
 
-			    var start = new google.maps.LatLng(19.7047528,-101.1648662);
-			    var end = new google.maps.LatLng(19.7069751,-101.1760687);
-			
+			    var start = myCenter;
+			    var end = new google.maps.LatLng(19.7208378,-101.2158834);
+				var markers = new google.maps.Marker({
+			  		icon:'/img/cuadro-localizador.png'
+			  	});
 			    var directionsDisplay = new google.maps.DirectionsRenderer();
-			    directionsDisplay.setMap(map); // map should be already initialized.
+			    directionsDisplay.setOptions({
+			    	'markerOptions' : markers, 
+			    	'draggable': false});
+			    var directionsService = new google.maps.DirectionsService();			    
+			    
+			    directionsDisplay.setMap(map);
 			
 			    var request = {
 			        origin : start,
@@ -65,15 +78,20 @@
 			        travelMode : google.maps.TravelMode.DRIVING
 			    };
 			    directionsService.route(request, function(response, status) {
-			        if (status == google.maps.DirectionsStatus.OK) {
-			            directionsDisplay.setDirections(response);
+			        if (status == google.maps.DirectionsStatus.OK) {			        	
+			            directionsDisplay.setDirections(response);	
 			        }
 			    });
+			}
+			function roundMe(n, sig) {
+				if (n === 0) return 0;
+				var mult = Math.pow(10, sig);
+				return Math.round(n * mult) / mult;
 			}
 		</script>
 	</head>
 	<body>
-		<a id="showMap" onclick="javascript: initialize(); void(0);">Mostrar Mapa</a>
+		<a id="showMap" onclick="javascript: initialize();">Mostrar Mapa</a>
 		<div id="map-canvas"></div>
 		
 	</body>
