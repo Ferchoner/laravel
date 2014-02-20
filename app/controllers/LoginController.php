@@ -14,9 +14,7 @@ class LoginController extends BaseController {
 			return Response::json( array( 'error' => TRUE, 'message' => 'El usuario no existe' ) );
 
         if ((Auth::attempt(array('email'=>$email, 'password'=>$password))))
-        {
-        	return Response::json( array( 'error' => FALSE, 'message' => 'Bienvenido!!' ) );   
-        }
+        	return Response::json( array( 'error' => FALSE, 'message' => 'Bienvenido!!' ) );
 		
 		return Response::json( array( 'error' => TRUE, 'message' => 'Correo o Password Incorrecto' ) );
 	}

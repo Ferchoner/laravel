@@ -33,6 +33,8 @@ Route::get('/my-account', array( 'before' => 'auth', 'uses'=>'MyAccountControlle
 
 Route::get('/maps', array( 'before' => 'auth', 'uses'=>'MapsController@showMap' ));
 
+Route::get('/get-maps', array( 'before' => 'auth', 'uses'=>'MapsController@getNearStores' ));
+
 /*
 |--------------------------------------------------------------------------
 | Application Composers
@@ -57,9 +59,6 @@ View::composer('registro', function($view)
 	$estados = Estado::all();	
 	foreach ($estados as $key => $value) {
 		$estadosCorrecto[$value['id']] = $value['nombre'];
-	}
-	if( Auth::check() ){
-		
 	}
     $view->with('arrayDays', $arrayDays);
 	$view->with('arrayMonths', $arrayMonths);
