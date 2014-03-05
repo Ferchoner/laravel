@@ -13,7 +13,7 @@ class MapsController extends BaseController {
 		$dst = Input::get('dst', 25);
 		$i = Input::get('i', 0);
 		$n = Input::get('n', 5);
-		if( $lat AND $lng){
+		if( $lat AND $lng){ // Hay que cambiar este codigo al modelo de stores, aqui no deberia de estar ninguna consulta!
 			$points = DB::select( DB::raw('
 				SELECT id, name, address, lat, lng, ( 3959 * acos( cos( radians( :latitude1 ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude2 ) ) * sin( radians( lat ) ) ) ) AS distance 
 				FROM stores 
@@ -25,6 +25,11 @@ class MapsController extends BaseController {
 		
 		return Response::json(array('error'=>TRUE,'message'=>'missing data'));
 	}    
+	
+	function createCoordinates(){
+		$coordenadas = PsStore::whereRaw('latitude = 0 AND longitude = 0')->take(110)->get();		
+		return View::make('creating-coordinates', array('coordenadas'=>$coordenadas));
+	}
 }
 
 

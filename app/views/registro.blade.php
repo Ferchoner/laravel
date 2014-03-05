@@ -66,6 +66,16 @@
 						{{ Form::password('password', array('id'=>'password')) }}
 					</div>
 				</div>
+				@if ( Auth::check() )
+					<div class="row collapse">
+						<div class="small-3 column left">
+							{{ Form::label(null, 'Nueva Contrase&ntilde;a', array('class' => 'prefix')) }}
+						</div>
+						<div class="small-4 column left">
+							{{ Form::password('new_password', array('id'=>'new_password')) }}
+						</div>
+					</div>
+				@endif
 				<div class="row collapse">
 					<div class="small-2 column">
 						{{ Form::label(null, 'Direcci&oacute;n', array('class' => 'prefix')) }}
@@ -113,4 +123,13 @@
 		</div>
 	</fieldset>
 	{{ Form::close() }}
+	<script>	
+		@if ( Auth::check() )
+			$('select[name=estado]').change();
+			setTimeout( function(){
+			    $('select[name=ciudad]').val('{{Auth::user()->ciudad}}');
+			    $('select[name=ciudad]').change();
+			}, 400);
+		@endif
+	</script>
 </div>

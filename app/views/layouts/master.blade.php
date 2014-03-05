@@ -8,16 +8,8 @@
 		{{-- Set the viewport width to device width for mobile --}}
 		<meta name="viewport" content="width=device-width">		
 		<title>Bienvenido a mi Primer Proyecto</title>
-
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/foundation.css">
-
-		<script src="/js/vendor/custom.modernizr.js"></script>
-		<script src="/js/jquery.min.js"></script>
-		<script src="/js/foundation.min.js"></script>
-		<script src="/js/error-module.js"></script>
-		<script src="/js/principal.js"></script>
-		<script src="/js/vendor/zepto.js"></script>
 		<title>Usuarios</title>
 	</head>
 	<body>
@@ -41,9 +33,9 @@
 			{{-- Nav Sidebar --}}
 			{{-- This is source ordered to be pulled to the left on larger screens --}}
 			<div class="large-3 pull-9 columns">
-				<ul class="side-nav">
+				<ul class="side-nav">					
 					<li>
-						<a href="#">Section 1</a>
+						<a id="showMap">Buscar Oxxos</a>
 					</li>
 					<li>
 						<a href="#">Section 2</a>
@@ -96,5 +88,12 @@
 				</div>
 			</div>
 		</footer>
+		<script src="/js/vendor/custom.modernizr.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/foundation.min.js"></script>
+		<script src="/js/error-module.js"></script>
+		<script src="/js/principal.js"></script>
+		<script src="/js/vendor/zepto.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBOsVNVZT8bOI-qww5JfGfTUIeAsD-yVOE&sensor=false"></script>
 	</body>
 </html>

@@ -31,9 +31,13 @@ Route::get('/my-account-actions', array( 'uses'=>'MyAccountController@actions'))
 
 Route::get('/my-account', array( 'before' => 'auth', 'uses'=>'MyAccountController@formulario'));
 
-Route::get('/maps', array( 'before' => 'auth', 'uses'=>'MapsController@showMap' ));
+Route::post('/actualizar', array( 'before' => 'csrf|auth', 'uses'=>'MyAccountController@actualizar'));
 
-Route::get('/get-maps', array( 'before' => 'auth', 'uses'=>'MapsController@getNearStores' ));
+Route::get('/maps', array( 'uses'=>'MapsController@showMap' ));
+
+Route::get('/get-maps', array( 'uses'=>'MapsController@getNearStores' ));
+
+Route::get('/create-coordinates', array( 'before' => 'auth', 'uses'=>'MapsController@createCoordinates' ));
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +53,7 @@ View::composer('registro', function($view)
 	$arrayDays['dia'] = 'Dia';
 	$arrayMonths['mes'] = 'Mes';
 	$arrayYears['anio'] = 'Año';
-	$estadosCorrecto['ciudad'] = 'Estado';		
+	$estadosCorrecto['estado'] = 'Estado';		
 	for( $i=1; $i < 32; $i++)
 		$arrayDays[($i < 10 ? '0' . $i : $i)] = $i;
 	for ($i=1; $i < 13; $i++) 
