@@ -1,4 +1,4 @@
-var address;
+var address, map, markers = [];
 
 function getStoresByAddress(){
 	address = $('#address').val();
@@ -6,8 +6,26 @@ function getStoresByAddress(){
 		$('div.mensajes').html('Dirección vacía o muy pequeña');
 		$('div.mensajes').slideDown(400);
 	}
-	else{
-		//$.post('/');
+	else{		
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode({'address':address}, function(results, status){			
+			if( status === google.maps.GeocoderStatus.OK ){
+				clearMarkers(null);
+				
+				var marker = new google.maps.Marker({
+			  		position:new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng()),
+			  		icon:'/img/ico-pushpin-mapa.png',
+			  		map:map
+			  	});
+			  	markers.push(marker);
+			  	
+			  	getStores( results[0].geometry.location.lat(), results[0].geometry.location.lng(), address);
+			}
+			else{
+				$('#errors').children('div.alert').html('No se pudo encontrar tu dirección');
+				$('#errors').slideDown(500);
+			}
+		});		
 	}
 }
 
@@ -47,8 +65,8 @@ function initialize()
   	return false;
 }
 
-function getStores( lat, lng) {				
-	$.get('/get-maps', { 'ltd':lat, 'lng':lng}, function( points ){
+function getStores( lat, lng, address) {				
+	$.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
 		if(points.error)
 			alert('Ocurrio un error inesperado en la busqueda:'+points.message);
 		else{
@@ -103,6 +121,5 @@ function clearMarkers(){
 		markers[i].setMap(null);
 	}
 	markers = [];
-	if(directionsDisplay) directionsDisplay.setMap(null);
-	
+	if(directionsDisplay) directionsDisplay.setMap(null);	
 }

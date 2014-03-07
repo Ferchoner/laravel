@@ -13,18 +13,19 @@ class MapsController extends BaseController {
 		$dst = Input::get('dst', 25);
 		$i = Input::get('i', 0);
 		$n = Input::get('n', 5);
-		if( $lat AND $lng){ // Hay que cambiar este codigo al modelo de stores, aqui no deberia de estar ninguna consulta!
-			$points = DB::select( DB::raw('
-				SELECT id, name, address, lat, lng, ( 3959 * acos( cos( radians( :latitude1 ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude2 ) ) * sin( radians( lat ) ) ) ) AS distance 
-				FROM stores 
-				HAVING distance < :distance ORDER BY distance LIMIT :begins , :number
-			'), array('latitude1'=>$lat, 'longitude'=>$lng, 'latitude2'=>$lat, 'distance'=>$dst, 'begins'=>$i, 'number'=>$n));
-			
-			return Response::json($points);
+		$address = Input::get('address', FALSE);
+		if( $lat AND $lng){ // Hay que cambiar este codigo al modelo de stores, aqui no deberia de estar ninguna consulta!			
+			$points = Store::getNear( $lat, $lng, $dst, $i, $n );
+			$morePoints = array();
+			if ( $address AND strlen($address) > 4 AND count($points) < $n)
+			{
+				$morePoints = Store::getByAddress( $address, $i, ($n - count($points)));				
+				if( $morePoints ) $morePoints = array();
+			}
+			return Response::json(array_merge($points, $morePoints));
 		}
-		
 		return Response::json(array('error'=>TRUE,'message'=>'missing data'));
-	}    
+	}
 	
 	function createCoordinates(){
 		$coordenadas = PsStore::whereRaw('latitude = 0 AND longitude = 0')->take(110)->get();		

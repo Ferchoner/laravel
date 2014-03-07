@@ -47,6 +47,7 @@ function myAccountButtonsActions() {
 	$('#showMap').click(function(e){
 		$('#content').load('/maps', function() {			
 			loadMaps();
+			$(document).foundation();
 		});
 	});
 	
@@ -283,9 +284,8 @@ function loadMyAccountJS() {
 
 function loadMaps(){		
 	initialize();
-	
-	$('#aHome').unbind();
-	$('#aHome').click(function(e) {
+		
+	$('#aHome').unbind().click(function(e) {
 		e.preventDefault();
 		$('#content').append('<div id="temp" style="visible:hidden"></div>');
 		$('#temp').load('/home #content', function() {
