@@ -37,7 +37,7 @@ Route::get('/maps', array( 'uses'=>'MapsController@showMap' ));
 
 Route::get('/get-maps', array( 'uses'=>'MapsController@getNearStores' ));
 
-Route::get('/create-coordinates', array( 'before' => 'auth', 'uses'=>'MapsController@createCoordinates' ));
+Route::get('/create-coordinates', array( 'before' => 'auth', 'uses'=>'MapsController@createCoordinates' )); // actually not in use
 
 /*
 |--------------------------------------------------------------------------

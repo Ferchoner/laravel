@@ -12,12 +12,13 @@ class MapsController extends BaseController {
 		$lng = Input::get('lng', FALSE);
 		$dst = Input::get('dst', 25);
 		$i = Input::get('i', 0);
-		$n = Input::get('n', 5);
+		$n = Input::get('n', 10);
 		$address = Input::get('address', FALSE);
-		if( $lat AND $lng){ // Hay que cambiar este codigo al modelo de stores, aqui no deberia de estar ninguna consulta!			
+		if( $lat AND $lng)
+		{
 			$points = Store::getNear( $lat, $lng, $dst, $i, $n );
 			$morePoints = array();
-			if ( $address AND strlen($address) > 4 AND count($points) < $n)
+			if ( $address AND strlen($address) > 4 AND count($points) < $n )
 			{
 				$morePoints = Store::getByAddress( $address, $i, ($n - count($points)));				
 				if( $morePoints ) $morePoints = array();
@@ -32,5 +33,3 @@ class MapsController extends BaseController {
 		return View::make('creating-coordinates', array('coordenadas'=>$coordenadas));
 	}
 }
-
-

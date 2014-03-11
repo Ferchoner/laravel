@@ -20,6 +20,11 @@
 			<div class="small-5 column left">
 				{{ Form::text('address', null, array('id'=>'address', 'placeholder'=>'Dirección...')) }}
 			</div>
+			<ul clas="dropdown">
+			  <li><a >This is a link</a></li>
+			  <li><a >This is another</a></li>
+			  <li><a >Yet another</a></li>
+			</ul>
 			<div class="small-2 column">
 				{{ Form::submit('Buscar', array('class'=>'secondary button postfix', 'id'=>'searchStores', 'onClick'=>'event.preventDefault(); getStoresByAddress()')) }}
 			</div>

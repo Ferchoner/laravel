@@ -1,5 +1,5 @@
 
-var myCenter, directionsDisplay, map, infoWindow, markers = [];
+var myCenter, directionsDisplay, map, infoWindow, markers = [], xhr;
 
 $(document).ready(function() {
 	myCenter = new google.maps.LatLng(19.702446, -101.192794);
@@ -292,5 +292,32 @@ function loadMaps(){
 			contenido = $('#temp #content').children();
 			$('#content').html(contenido);
 		});
+	});
+	
+	$('input[name=address]').keyup( function( event ){
+		$('.resultados').slideUp( 300 );
+		address = $('input[name=address]').val();
+		if( address.length > 4 ) {
+			geocoder = new google.maps.Geocoder();
+			geocoder.geocode({'address':address}, function(results, status){			
+				if( status === google.maps.GeocoderStatus.OK ){
+					clearMarkers(null);
+					lat = results[0].geometry.location.lat();
+					lng = results[0].geometry.location.lng();
+					var marker = new google.maps.Marker({
+				  		position:new google.maps.LatLng(lat, lng),
+				  		icon:'/img/ico-pushpin-mapa.png',
+				  		map:map
+				  	});
+				  	markers.push(marker);
+				  	
+				  	if( xhr != null )
+						xhr.abort();
+					xhr = $.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
+						
+					});
+				}
+			});	
+		}
 	});
 }

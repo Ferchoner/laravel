@@ -65,8 +65,10 @@ function initialize()
   	return false;
 }
 
-function getStores( lat, lng, address) {				
-	$.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
+function getStores( lat, lng, address) {
+	if( xhr != null )
+		xhr.abort();
+	xhr = $.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
 		if(points.error)
 			alert('Ocurrio un error inesperado en la busqueda:'+points.message);
 		else{
