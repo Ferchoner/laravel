@@ -1,0 +1,30 @@
+.mDropdown {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #CCCCCC;
+	height: auto;
+	list-style: none outside none;
+	margin-left: 0;
+	margin-top: 2px;	
+	max-height: none;
+	max-width: 282px;
+	position: absolute;	
+	width: 100%;
+	z-index: 99;
+	left: 20%;
+    top: 12%;
+    width: 38%;
+    display: none;
+}
+
+.mDropdown li {
+	padding-left: 5px;
+}
+
+.mDropdown li:hover {
+	background-color: #D0D0D0;
+}
+
+.mDropdown li a {
+	color: #000;
+}
+

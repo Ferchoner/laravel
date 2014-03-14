@@ -10,6 +10,7 @@
 		<title>Bienvenido a mi Primer Proyecto</title>
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/foundation.css">
+		<link rel="stylesheet" href="/css/global.css" type="text/css" media="screen" title="Estilos Globales" charset="utf-8"/>
 		<title>Usuarios</title>
 	</head>
 	<body>
@@ -95,5 +96,6 @@
 		<script src="/js/principal.js"></script>
 		<script src="/js/vendor/zepto.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBOsVNVZT8bOI-qww5JfGfTUIeAsD-yVOE&sensor=false"></script>
+		<script src="/js/maps.js" type="text/javascript" charset="utf-8"></script>		
 	</body>
 </html>

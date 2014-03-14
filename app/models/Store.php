@@ -32,11 +32,11 @@ class Store extends Eloquent {
 	
 	public static function getByAddress( $address, $i = 0, $n = 10)
 	{		
-		return DB::select( DB::raw('
+		return DB::select( DB::raw("
 			SELECT id, name, address, lat, lng 
 			FROM stores 
-			WHERE name LIKE \':address1\' OR address LIKE \':address2\'
-			LIMIT :number
-			'), array('address1'=>('%'.$address.'%'), 'address2'=>('%'.$address.'%'), 'number'=>(int)$n));
+			WHERE name LIKE '?' OR address LIKE '?'
+			LIMIT ?
+			"), array('address1'=>('%'.$address.'%'), 'address2'=>('%'.$address.'%'), 'number'=>(int)$n));
 	}
 }

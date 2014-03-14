@@ -1,4 +1,4 @@
-var address, map, markers = [];
+var address, map, markers = [], lists = '';
 
 function getStoresByAddress(){
 	address = $('#address').val();
@@ -65,7 +65,8 @@ function initialize()
   	return false;
 }
 
-function getStores( lat, lng, address) {
+function getStores( lat, lng, address, showList) {
+	lists = '';
 	if( xhr != null )
 		xhr.abort();
 	xhr = $.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
@@ -73,22 +74,46 @@ function getStores( lat, lng, address) {
 			alert('Ocurrio un error inesperado en la busqueda:'+points.message);
 		else{
 			$.each( points, function( index, value){
-				var marker = new google.maps.Marker({
-			  		position:new google.maps.LatLng(value.lat,value.lng),
-			  		icon:'/img/img-0'+(index+1)+'.png',
-			  		map: map
-			  	});
-		  		
-		  		markers.push(marker);
-		  		google.maps.event.addListener(marker,'click',function() {					
-					if(infoWindow) infoWindow.close();
-					infoWindow.setOptions({
-						content:'Nombre: '+value.name+'<br /> Direccion:'+value.address+'<br /><a id="showMap" onclick="javascript: displayRoute('+roundMe(lat, 6)+', '+roundMe(lng, 6)+', '+roundMe(value.lat, 6)+', '+roundMe(value.lng, 6)+' );">Ruta hasta aqui</a>'
-					});
-			  		infoWindow.open(map,marker);
-			  	});
+				if ( showList )
+					lists += '<li><a onClick="event.preventDefault(); showStore('+roundMe(value.lat, 6)+', '+roundMe(value.lng, 6)+');">'+value.name+'</a></li>';
+				else{
+					var marker = new google.maps.Marker({
+				  		position:new google.maps.LatLng(value.lat,value.lng),
+				  		icon:'/img/img-0'+(index+1)+'.png',
+				  		map: map
+				  	});
+			  		
+			  		markers.push(marker);
+			  		google.maps.event.addListener(marker,'click',function() {					
+						if(infoWindow) infoWindow.close();
+						infoWindow.setOptions({
+							content:'Nombre: '+value.name+'<br /> Direccion:'+value.address+'<br /><a id="showMap" onclick="javascript: displayRoute('+roundMe(lat, 6)+', '+roundMe(lng, 6)+', '+roundMe(value.lat, 6)+', '+roundMe(value.lng, 6)+' );">Ruta hasta aqui</a>'
+						});
+				  		infoWindow.open(map,marker);
+				  	});	
+				}
 			});
+			if ( showList && points.length > 1 ) $('.mDropdown').html(lists).slideDown();
 		}
+	});
+}
+
+function showStore( lat, lng){
+	// Quitamos todas las marcas anteriores;
+	clearMarkers(null);
+	//  
+	var marker = new google.maps.Marker({
+  		position:new google.maps.LatLng(lat, lng),
+  		icon:'/img/ico-pushpin-mapa.png',
+  		map:map
+  	});
+  	
+  	markers.push(marker);
+  	
+  	getStores( lat, lng);
+  	
+	$('.mDropdown').slideUp(300, function(){
+		$(this).html('');
 	});
 }
 

@@ -299,24 +299,10 @@ function loadMaps(){
 		address = $('input[name=address]').val();
 		if( address.length > 4 ) {
 			geocoder = new google.maps.Geocoder();
-			geocoder.geocode({'address':address}, function(results, status){			
-				if( status === google.maps.GeocoderStatus.OK ){
-					clearMarkers(null);
-					lat = results[0].geometry.location.lat();
-					lng = results[0].geometry.location.lng();
-					var marker = new google.maps.Marker({
-				  		position:new google.maps.LatLng(lat, lng),
-				  		icon:'/img/ico-pushpin-mapa.png',
-				  		map:map
-				  	});
-				  	markers.push(marker);
-				  	
-				  	if( xhr != null )
-						xhr.abort();
-					xhr = $.get('/get-maps', {'ltd':lat, 'lng':lng, 'address':address}, function( points ){
-						
-					});
-				}
+			geocoder.geocode({'address':address}, function(results, status){
+				lat = status === google.maps.GeocoderStatus.OK ? results[0].geometry.location.lat() : 19.702773;
+				lng = status === google.maps.GeocoderStatus.OK ? results[0].geometry.location.lng() : -101.192395;										
+				getStores( lat, lng, address, true);
 			});	
 		}
 	});
