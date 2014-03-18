@@ -1,6 +1,7 @@
 var address, map, markers = [], lists = '';
 
-function getStoresByAddress(){
+function getStoresByAddress(){	
+	$('.mDropdown').slideUp( 300 );
 	address = $('#address').val();
 	if( address == '' || address.length < 4 ){
 		$('div.mensajes').html('Dirección vacía o muy pequeña');

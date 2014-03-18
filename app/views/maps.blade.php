@@ -23,7 +23,7 @@
 			<ul class="mDropdown">			  
 			</ul>
 			<div class="small-2 column">
-				{{ Form::submit('Buscar', array('class'=>'secondary button postfix', 'id'=>'searchStores', 'onClick'=>'event.preventDefault(); getStoresByAddress()')) }}
+				{{ Form::submit('Buscar', array('class'=>'secondary button postfix', 'id'=>'searchStores', 'onClick'=>'event.preventDefault(); event.stopPropagation(); getStoresByAddress()')) }}
 			</div>
 			<div class="large-2 column">
 				<a id="aHome" class="right small secondary button">Regresar</a>
