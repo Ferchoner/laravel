@@ -41,22 +41,22 @@ function initialize()
 	map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);				
 
   	// Creating listener for map
-	google.maps.event.addListener(map,'click',function( event ) {
+	google.maps.event.addListener(map, 'click', function( event ) {
 		// Quitamos todas las marcas anteriores;
 		clearMarkers(null);
-		//  
+		
 		var marker = new google.maps.Marker({
-	  		position:new google.maps.LatLng(event.latLng.d,event.latLng.e),
+	  		position:event.latLng,
 	  		icon:'/img/ico-pushpin-mapa.png',
 	  		map:map
 	  	});				  	
 	  	
 	  	markers.push(marker);
-		
-		google.maps.event.addListener(marker,'click',function() {											
+	  	
+		google.maps.event.addListener(marker, 'click', function() {
 			if(infoWindow) infoWindow.close();
 			infoWindow.setOptions({
-		  		content:'<a id="showMap" onclick="javascript: getStores('+roundMe(event.latLng.d, 6)+', '+roundMe(event.latLng.e, 6)+')">Bucar los oxxos mas cercanos a este lugar</a>'
+		  		content:'<a id="showMap" onclick="javascript: getStores('+roundMe(event.latLng.lat(), 6)+', '+roundMe(event.latLng.lng(), 6)+')">Bucar los oxxos mas cercanos a este lugar</a>'
 		  	});
 	  		infoWindow.open(map,marker);
 	  	});
