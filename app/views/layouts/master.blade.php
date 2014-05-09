@@ -17,7 +17,7 @@
 		{{-- Header and Nav --}}
 		<div class="row">
 			<div class="large-3 columns">
-				<h1 id="aHome"><img src="http://placehold.it/400x100&text=Logo" /></h1>
+				<h1 class="aHome"><img src="http://placehold.it/400x100&text=Logo" /></h1>
 			</div>
 			<div class="large-9 columns">
 				<ul id="my_account_buttons" class="right button-group">

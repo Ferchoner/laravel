@@ -101,14 +101,17 @@ function loadLoginJS() {
 		if ($(this).attr('id'))
 			hideError($(this).attr('id'));
 	});
-
-	$('#aHome').unbind();
-	$('#aHome').click(function(e) {
-		e.preventDefault();
-		$('#content').append('<div id="temp" style="visible:hidden"></div>');
-		$('#temp').load('/home #content', function() {
-			contenido = $('#temp #content').children();
-			$('#content').html(contenido);
+	
+	$('#aHome, .aHome').each( function(){
+		$(this).unbind();
+		$(this).click(function(e) {
+			e.preventDefault();
+			$('div.error_container').slideUp(400);
+			$('#content').append('<div id="temp" style="visible:hidden"></div>');
+			$('#temp').load('/home #content', function() {
+				contenido = $('#temp #content').children();
+				$('#content').html(contenido);
+			});
 		});
 	});
 };
@@ -180,15 +183,17 @@ function loadRegistroJS() {
 		$('div.error_container').slideUp(400);
 		hideErrorInput('select', $(this).attr('name'));
 	});
-
-	$('#aHome').unbind();
-	$('#aHome').click(function(e) {
-		e.preventDefault();
-		$('div.error_container').slideUp(400);
-		$('#content').append('<div id="temp" style="visible:hidden"></div>');
-		$('#temp').load('/home #content', function() {
-			contenido = $('#temp #content').children();
-			$('#content').html(contenido);
+	
+	$('#aHome, .aHome').each( function(){
+		$(this).unbind();
+		$(this).click(function(e) {
+			e.preventDefault();
+			$('div.error_container').slideUp(400);
+			$('#content').append('<div id="temp" style="visible:hidden"></div>');
+			$('#temp').load('/home #content', function() {
+				contenido = $('#temp #content').children();
+				$('#content').html(contenido);
+			});
 		});
 	});
 	
@@ -251,15 +256,18 @@ function loadMyAccountJS() {
         hideErrorInput('select', $(this).attr('name'));
     });
 
-    $('#aHome').unbind().click(function (e) {
-        e.preventDefault();
-        $('div.error_container').slideUp(400);
-        $('#content').append('<div id="temp" style="visible:hidden"></div>');
-        $('#temp').load('/home #content', function () {
-            contenido = $('#temp #content').children();
-        	$('#content').html(contenido);
-        });
-    });
+	$('#aHome, .aHome').each( function(){
+		$(this).unbind();
+		$(this).click(function(e) {
+			e.preventDefault();
+			$('div.error_container').slideUp(400);
+			$('#content').append('<div id="temp" style="visible:hidden"></div>');
+			$('#temp').load('/home #content', function() {
+				contenido = $('#temp #content').children();
+				$('#content').html(contenido);
+			});
+		});
+	});
 
     $('select[name=anio], select[name=mes], select[name=dia]').unbind().change(function () {
         $('div.error_container').slideUp(400);
@@ -271,7 +279,7 @@ function loadMyAccountJS() {
         $.get('/get-cities', {'id': $('select[name=estado]').val()}, function (data) {
             options = '<option>Ciudad</option>';
             luOptions = '<li class="selected">Ciudad</li>';
-            $.each(data, function (index, value) {
+            $.each(data, function(index, value) {
                 options += '<option value="' + value.id + '">' + value.nombre + '</option>';
                 luOptions += '<li>' + value.nombre + '</li>';
             });
@@ -285,12 +293,17 @@ function loadMyAccountJS() {
 function loadMaps(){		
 	initialize();
 		
-	$('#aHome').unbind().click(function(e) {
-		e.preventDefault();
-		$('#content').append('<div id="temp" style="visible:hidden"></div>');
-		$('#temp').load('/home #content', function() {
-			contenido = $('#temp #content').children();
-			$('#content').html(contenido);
+	
+	$('#aHome, .aHome').each( function(){
+		$(this).unbind();
+		$(this).click(function(e) {
+			e.preventDefault();
+			$('div.error_container').slideUp(400);
+			$('#content').append('<div id="temp" style="visible:hidden"></div>');
+			$('#temp').load('/home #content', function() {
+				contenido = $('#temp #content').children();
+				$('#content').html(contenido);
+			});
 		});
 	});
 	
