@@ -39,6 +39,16 @@ Route::get('/get-maps', array( 'uses'=>'MapsController@getNearStores' ));
 
 Route::get('/create-coordinates', array( 'before' => 'auth', 'uses'=>'MapsController@createCoordinates' )); // actually not in use
 
+Route::get('/admin', array('uses'=>'AdminController@indexAction'));
+
+Route::post('/admin/login', array('uses'=>'AdminController@loginAction'));
+
+Route::post('/admin/logout', array('uses'=>'AdminController@logoutAction'));
+
+Route::get('/admin/posts', array('uses'=>'AdminController@viewPosts'));
+
+Route::post('/admin/posts', array('uses'=>'AdminController@submitPost'));
+
 /*
 |--------------------------------------------------------------------------
 | Application Composers

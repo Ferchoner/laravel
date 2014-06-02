@@ -12,7 +12,7 @@
 			var coordenadas = [];
 			var geocoder;
 			@foreach ($coordenadas as $index=>$coordinate)
-			coordenadas['{{$index}}'] = {'id_store':{{$coordinate['id_store']}},'address1':'{{$coordinate['address1']}}','address2':'{{$coordinate['address2']}}','postcode':{{$coordinate['postcode']}},'city':'{{$coordinate['city']}}'};
+			    coordenadas['{{$index}}'] = {'id_store':{{$coordinate['id_store']}},'address1':'{{$coordinate['address1']}}','address2':'{{$coordinate['address2']}}','postcode':{{$coordinate['postcode']}},'city':'{{$coordinate['city']}}'};
 			@endforeach
 			$(document).ready(function(){
 				$.each(coordenadas, function(index, value){
