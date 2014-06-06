@@ -49,6 +49,12 @@ Route::get('/admin/posts', array('uses'=>'AdminController@viewPosts'));
 
 Route::post('/admin/posts', array('uses'=>'AdminController@submitPost'));
 
+Route::post('/api/get-code', array('uses'=>'ApiController@getCode'));
+
+Route::post('/api/get-token', array('uses'=>'ApiController@getToken'));
+
+Route::post('/api/refresh-token', array('uses'=>'ApiController@refreshToken'));
+
 /*
 |--------------------------------------------------------------------------
 | Application Composers

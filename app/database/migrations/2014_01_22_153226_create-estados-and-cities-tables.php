@@ -19,7 +19,7 @@ class CreateEstadosAndCitiesTables extends Migration {
 		Schema::create('ciudades', function($table) {
 	        $table->increments('id');
 	        $table->string('nombre', 30);
-			$table->int('estados_id', 4);
+			$table->integer('estados_id', 4);
 	    });
 	}
 
