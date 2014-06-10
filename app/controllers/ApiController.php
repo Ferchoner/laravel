@@ -14,6 +14,8 @@ class ApiController extends BaseController {
         $password = Input::get('password', '');
         $result = ApiClientUser::where('name', '=', $name)->first();
         $code = $result->getCode($password);
+        if($code->error)
+            return Response::json($code, 400);
         return Response::json($code);
     }
 
