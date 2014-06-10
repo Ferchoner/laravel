@@ -30,7 +30,6 @@ class ApiClientUser extends Eloquent {
         }
         else
             $code['message'] = 'La contraseña es incorrecta';
-
         return $code;
     }
 } 
